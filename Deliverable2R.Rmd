@@ -1,0 +1,77 @@
+---
+title: "Deliverable2TheAnchors"
+author: "Anchors"
+date: "2023-02-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+JoinEcon = read_csv("expect.csv")
+
+JoinDF = as.data.frame(JoinEcon)
+```
+
+```{r}
+str(JoinDF)
+```
+
+```{r}
+
+dataToFactor = JoinDF[,-c(1,2)]
+
+str(dataToFactor)
+```
+
+```{r}
+library(polycor)
+JoinMatrix=polycor::hetcor(dataToFactor)$correlations
+```
+
+```{r}
+library(ggcorrplot)
+
+ggcorrplot(JoinMatrix,
+           type = "lower") + 
+          theme(axis.text.x  = element_text(size = 5),
+                axis.text.y  = element_text(size = 5))
+```
+
+```{r}
+library(psych)
+psych::KMO(JoinMatrix) 
+```
+```{r}
+# is this an identity matrix? shouldn't be . . .
+cortest.bartlett(JoinMatrix,n=nrow(dataToFactor))$p.value>0.05
+```
+```{r}
+# is the matrix singular? shouldn't be . . .
+library(matrixcalc)
+
+is.singular.matrix(corMatrix)
+```
+aw beans
+
+```{r}
+fa.parallel(dataToFactor, fa = 'fa',correct = T,plot = F)
+```
+```{r}
+library(GPArotation)
+resfa <- fa(dataToFactor,
+            nfactors = 2,
+            cor = 'mixed',
+            rotate = "varimax",
+            fm="minres")
+```
+```{r}
+print(resfa$loadings,cutoff = 0.5)
+```
+```{r}
+fa.diagram(resfa,main = "EFA results")
+```
+
+
