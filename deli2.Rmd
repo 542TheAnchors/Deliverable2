@@ -8,8 +8,27 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
 
 ```{r}
-EconData=read.csv("expect.csv")
+EconData=read.csv("economy.csv")
 ```
+*Compute Correlations*
+library(polycor)
+cormatrix=polycor::hetcor(EconData)$correlation
+*Potentially need to remove or recode the region variable*
+*visualize the matrix*
+library(ggcorrplot)
+ggcorrplot(cormatrix,type="lower")+theme(axis.text.x = element_text(size=5),axis.text.y = element_text(size=5))
+*Check conditions*
+library(psych)
+psych::KMO(cormatrix)
+*Identity matrix test - False*
+cortest.bartlett(cormatrix,n=nrow(EconData))$p.value>0.05
+*Singular matrix check - True*
+library(matrixcalc)
+
+is.singular.matrix(cormatrix)
+
+*Clust suggestions - requires removal of the region.*
+fa.parallel(EconData, fa = 'fa',correct = T,plot = F)
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
 

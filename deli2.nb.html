@@ -1760,11 +1760,23 @@ the chunk or by placing your cursor inside it and pressing
 <em>Ctrl+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuRWNvbkRhdGE9cmVhZC5jc3YoXCJleHBlY3QuY3N2XCIpXG5gYGAifQ== -->
-<pre class="r"><code>EconData=read.csv(&quot;expect.csv&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuRWNvbkRhdGE9cmVhZC5jc3YoXCJlY29ub215LmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code>EconData=read.csv(&quot;economy.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p><em>Compute Correlations</em> library(polycor)
+cormatrix=polycor::hetcor(EconData)<span class="math inline">\(correlation *Potentially need to remove or recode
+the region variable* *visualize the matrix* library(ggcorrplot)
+ggcorrplot(cormatrix,type=&quot;lower&quot;)+theme(axis.text.x =
+element_text(size=5),axis.text.y = element_text(size=5)) *Check
+conditions* library(psych) psych::KMO(cormatrix) *Identity matrix test -
+False*
+cortest.bartlett(cormatrix,n=nrow(EconData))\)</span>p.value&gt;0.05
+<em>Singular matrix check - True</em> library(matrixcalc)</p>
+<p>is.singular.matrix(cormatrix)</p>
+<p><em>Clust suggestions - requires removal of the region.</em>
+fa.parallel(EconData, fa = ‘fa’,correct = T,plot = F)</p>
 <p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the
 toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
 <p>When you save the notebook, an HTML file containing the code and
@@ -1776,7 +1788,7 @@ run any R code chunks. Instead, the output of the chunk when it was last
 run in the editor is displayed.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkN0cmwrU2hpZnQrRW50ZXIqLiANCg0KYGBge3J9DQpFY29uRGF0YT1yZWFkLmNzdigiZXhwZWN0LmNzdiIpDQpgYGANCg0KQWRkIGEgbmV3IGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqSW5zZXJ0IENodW5rKiBidXR0b24gb24gdGhlIHRvb2xiYXIgb3IgYnkgcHJlc3NpbmcgKkN0cmwrQWx0K0kqLg0KDQpXaGVuIHlvdSBzYXZlIHRoZSBub3RlYm9vaywgYW4gSFRNTCBmaWxlIGNvbnRhaW5pbmcgdGhlIGNvZGUgYW5kIG91dHB1dCB3aWxsIGJlIHNhdmVkIGFsb25nc2lkZSBpdCAoY2xpY2sgdGhlICpQcmV2aWV3KiBidXR0b24gb3IgcHJlc3MgKkN0cmwrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4NCg0KVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLiANCg0KVHJ5IGV4ZWN1dGluZyB0aGlzIGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqUnVuKiBidXR0b24gd2l0aGluIHRoZSBjaHVuayBvciBieSBwbGFjaW5nIHlvdXIgY3Vyc29yIGluc2lkZSBpdCBhbmQgcHJlc3NpbmcgKkN0cmwrU2hpZnQrRW50ZXIqLiANCg0KYGBge3J9DQpFY29uRGF0YT1yZWFkLmNzdigiZWNvbm9teS5jc3YiKQ0KYGBgDQoqQ29tcHV0ZSBDb3JyZWxhdGlvbnMqDQpsaWJyYXJ5KHBvbHljb3IpDQpjb3JtYXRyaXg9cG9seWNvcjo6aGV0Y29yKEVjb25EYXRhKSRjb3JyZWxhdGlvbg0KKlBvdGVudGlhbGx5IG5lZWQgdG8gcmVtb3ZlIG9yIHJlY29kZSB0aGUgcmVnaW9uIHZhcmlhYmxlKg0KKnZpc3VhbGl6ZSB0aGUgbWF0cml4Kg0KbGlicmFyeShnZ2NvcnJwbG90KQ0KZ2djb3JycGxvdChjb3JtYXRyaXgsdHlwZT0ibG93ZXIiKSt0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChzaXplPTUpLGF4aXMudGV4dC55ID0gZWxlbWVudF90ZXh0KHNpemU9NSkpDQoqQ2hlY2sgY29uZGl0aW9ucyoNCmxpYnJhcnkocHN5Y2gpDQpwc3ljaDo6S01PKGNvcm1hdHJpeCkNCipJZGVudGl0eSBtYXRyaXggdGVzdCAtIEZhbHNlKg0KY29ydGVzdC5iYXJ0bGV0dChjb3JtYXRyaXgsbj1ucm93KEVjb25EYXRhKSkkcC52YWx1ZT4wLjA1DQoqU2luZ3VsYXIgbWF0cml4IGNoZWNrIC0gVHJ1ZSoNCmxpYnJhcnkobWF0cml4Y2FsYykNCg0KaXMuc2luZ3VsYXIubWF0cml4KGNvcm1hdHJpeCkNCg0KKkNsdXN0IHN1Z2dlc3Rpb25zIC0gcmVxdWlyZXMgcmVtb3ZhbCBvZiB0aGUgcmVnaW9uLioNCmZhLnBhcmFsbGVsKEVjb25EYXRhLCBmYSA9ICdmYScsY29ycmVjdCA9IFQscGxvdCA9IEYpDQoNCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDdHJsK0FsdCtJKi4NCg0KV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDdHJsK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuDQoNClRoZSBwcmV2aWV3IHNob3dzIHlvdSBhIHJlbmRlcmVkIEhUTUwgY29weSBvZiB0aGUgY29udGVudHMgb2YgdGhlIGVkaXRvci4gQ29uc2VxdWVudGx5LCB1bmxpa2UgKktuaXQqLCAqUHJldmlldyogZG9lcyBub3QgcnVuIGFueSBSIGNvZGUgY2h1bmtzLiBJbnN0ZWFkLCB0aGUgb3V0cHV0IG9mIHRoZSBjaHVuayB3aGVuIGl0IHdhcyBsYXN0IHJ1biBpbiB0aGUgZWRpdG9yIGlzIGRpc3BsYXllZC4NCg==</div>
 
 
 
