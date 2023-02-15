@@ -73,5 +73,31 @@ print(resfa$loadings,cutoff = 0.5)
 ```{r}
 fa.diagram(resfa,main = "EFA results")
 ```
+```{r}
+newData=c("Energy consumption","Carbon dioxide emissions","Revenue from coal")
+removedData=setdiff(names(dataToFactor),newData)
+dataToFactor2=dataToFactor[,removedData]
+```
 
+```{r}
+library(polycor)
+corMatrix2=polycor::hetcor(dataToFactor2)$correlations
+```
+
+```{r}
+library(psych)
+psych::KMO(corMatrix2) 
+```
+```{r}
+cortest.bartlett(corMatrix2,n=nrow(dataToFactor2))$p.value>0.05
+```
+
+```{r}
+library(matrixcalc)
+
+is.singular.matrix(corMatrix2)
+```
+```{r}
+fa.parallel(dataToFactor2, fa = 'fa',correct = T,plot = F)
+```
 
