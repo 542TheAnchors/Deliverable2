@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-JoinEcon = read_csv("expect.csv")
+JoinEcon = read.csv("economy.csv")
 
 JoinDF = as.data.frame(JoinEcon)
 ```
@@ -51,8 +51,11 @@ cortest.bartlett(JoinMatrix,n=nrow(dataToFactor))$p.value>0.05
 ```{r}
 # is the matrix singular? shouldn't be . . .
 library(matrixcalc)
+```
 
-is.singular.matrix(corMatrix)
+
+```{r}
+is.singular.matrix(JoinMatrix)
 ```
 aw beans
 
@@ -99,5 +102,45 @@ is.singular.matrix(corMatrix2)
 ```
 ```{r}
 fa.parallel(dataToFactor2, fa = 'fa',correct = T,plot = F)
+```
+```{r}
+```
+
+
+```{r}
+hypo1=formula(Energy.consumption~ Oil.imports)
+hypo2=formula(Energy.consumption~ Oil.imports + Carbon.dioxide.emissions)
+hypo3=formula(Energy.consumption~ Oil.imports + Carbon.dioxide.emissions + Industrial.production.growth.rate)
+```
+
+
+```{r}
+gauss1=glm(hypo1,
+           data = multidata,
+           family = 'gaussian')
+
+gauss2=glm(hypo2,
+           data = multidata,
+           family = 'gaussian')
+
+gauss3=glm(hypo3,
+           data = multidata,
+           family = 'gaussian')
+```
+
+
+```{r}
+summary(gauss1)
+summary(gauss2)
+summary(gauss3)
+```
+
+
+```{r}
+library(rsq)
+rsq(gauss1,adj=T); rsq(gauss2,adj=T); rsq(gauss3,adj=T)
+```
+```{r}
+anova(gauss1,gauss2,gauss3,test="Chisq")
 ```
 
