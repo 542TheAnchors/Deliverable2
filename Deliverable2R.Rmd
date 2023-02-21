@@ -104,10 +104,9 @@ is.singular.matrix(corMatrix2)
 fa.parallel(dataToFactor2, fa = 'fa',correct = T,plot = F)
 ```
 ```{r}
-```
 
-
-```{r}
+regdata=dataToFactor2
+str(regdata,width=70,strict.width='cut')
 hypo1=formula(Energy.consumption~ Oil.imports)
 hypo2=formula(Energy.consumption~ Oil.imports + Carbon.dioxide.emissions)
 hypo3=formula(Energy.consumption~ Oil.imports + Carbon.dioxide.emissions + Industrial.production.growth.rate)
@@ -116,15 +115,15 @@ hypo3=formula(Energy.consumption~ Oil.imports + Carbon.dioxide.emissions + Indus
 
 ```{r}
 gauss1=glm(hypo1,
-           data = multidata,
+           data = regdata,
            family = 'gaussian')
 
 gauss2=glm(hypo2,
-           data = multidata,
+           data = regdata,
            family = 'gaussian')
 
 gauss3=glm(hypo3,
-           data = multidata,
+           data = regdata,
            family = 'gaussian')
 ```
 
