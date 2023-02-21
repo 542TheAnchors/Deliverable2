@@ -142,4 +142,19 @@ rsq(gauss1,adj=T); rsq(gauss2,adj=T); rsq(gauss3,adj=T)
 ```{r}
 anova(gauss1,gauss2,gauss3,test="Chisq")
 ```
+```{r}
+#model 3 is the preferred.
+plot(gauss3,1)
+
+```
+```{r}
+#Visual exploration
+plot(gauss3,2)
+```
+```{r}
+shapiro.test(gauss3$residuals)
+```
+```{r}
+plot(gauss3, 3)
+```
 
