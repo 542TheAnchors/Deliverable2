@@ -157,4 +157,8 @@ shapiro.test(gauss3$residuals)
 ```{r}
 plot(gauss3, 3)
 ```
+```{r}
+#Interpretting the results.
+
+```
 
