@@ -159,6 +159,12 @@ plot(gauss3, 3)
 ```
 ```{r}
 #Interpretting the results.
+#Factor Analysis
+#Our project’s factor analysis faced some difficulties, as there was a high level of positive correlation between all variables. After removing three variables (energy consumption, CO2 emissions, and Revenues from coal), the factor analysis suggested 2 factors, though the data remained singular. 
+
+#Regression Analysis
+#Our regression analysis used Energy consumption (per capita) as the dependent variable, with three hypotheses which considered additional independent variables (oil imports, CO2 emissions, and the Industrial growth rate). While all models are strong matches, the third model (hypo 3) is the strongest, showing a strong positive correlation between oil imports, emissions, and industrial growth with overall energy consumption. While not surprising, this tells us that these forms of energy engagement, whether in the form of industrial output or imports, is correlated with per capita increases in energy consumption. ##
+
 
 ```
 
